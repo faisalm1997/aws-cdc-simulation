@@ -1,0 +1,15 @@
+-- Create customers_staging table:
+--     operation VARCHAR(10)
+--     event_id VARCHAR(100)
+--     event_timestamp TIMESTAMP
+--     All columns from customers table
+
+-- Create audit table:
+--     audit_id BIGINT IDENTITY(1,1) PRIMARY KEY
+--     operation VARCHAR(10)
+--     table_name VARCHAR(100)
+--     record_id INTEGER
+--     old_values JSON (use VARCHAR for Redshift)
+--     new_values JSON
+--     processed_at TIMESTAMP DEFAULT GETDATE()
+--     processed_by VARCHAR(100)
