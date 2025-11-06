@@ -1,46 +1,72 @@
-# aws-cdc-simulation
+# CDC Simulation Pipeline
 
-Purpose: Simulates Change Data Capture (CDC) from MySQL/Postgres into Redshift using AWS DMS and Lambda for merge processing.
+Simulates Change Data Capture (CDC) events, processes INSERT/UPDATE/DELETE operations, and maintains a data warehouse in Redshift.
+
+## Architecture
+
+## Architecture
+
+Add architecture diagram
+
+## Project Structure 
 
 ```sh
-cdc-simulation/
+cdc-simulation-pipeline/
+├── README.md
 ├── infrastructure/
-│   ├── terraform/
-│   │   ├── modules/
-│   │   │   ├── dms/
-│   │   │   ├── lambda/
-│   │   │   ├── redshift/
-│   │   │   ├── s3/
-│   │   │   └── iam/
-│   │   └── envs/
-│   └── terragrunt/
-│       ├── dev/
-│       └── prod/
+│   ├── terragrunt/
+│   │   ├── terragrunt.hcl
+│   │   └── dev/
+│   │       ├── terragrunt.hcl
+│   │       └── env.hcl
+│   └── terraform/
+│       ├── main.tf
+│       ├── variables.tf
+│       ├── outputs.tf
+│       ├── s3.tf
+│       ├── redshift.tf
+│       ├── vpc.tf
+│       ├── lambda.tf
+│       ├── iam.tf
+│       ├── secrets.tf
+│       └── cloudwatch.tf
 ├── src/
 │   ├── lambda/
-│   │   └── dms_s3_to_redshift.py
-│   ├── simulators/
-│   │   ├── workload_generator.py
-│   │   └── seed_data.sql
-│   └── source_db/
-│       ├── docker-compose.yml
-│       └── init.sql
-├── config/
-│   ├── db_config.json
-│   └── dms_task_settings.json
+│   │   ├── cdc_processor/
+│   │   │   ├── handler.py
+│   │   │   ├── database.py
+│   │   │   ├── merge_logic.py
+│   │   │   └── requirements.txt
+│   │   └── event_validator/
+│   │       └── handler.py
+│   ├── simulator/
+│   │   ├── generate_cdc.py
+│   │   └── requirements.txt
+│   └── sql/
+│       ├── schema/
+│       │   ├── create_tables.sql
+│       │   └── create_staging.sql
+│       └── procedures/
+│           ├── merge_customers.sql
+│           └── audit_changes.sql
+├── powerbi/
+│   ├── dashboard.pbix
+│   └── connection_guide.md
 ├── scripts/
-│   ├── start_dms_task.sh
-│   ├── teardown.sh
-│   └── validate_redshift_data.sh
+│   ├── package_lambda.sh
+│   ├── deploy.sh
+│   ├── simulate_cdc.sh
+│   ├── setup_redshift.sh
+│   └── cleanup.sh
 ├── tests/
-│   ├── test_lambda_merge.py
-│   └── test_dms_output_format.py
-├── .github/
-│   ├── github-actions.yaml
-│   └── codepipeline-buildspec.yml
-├── docs/
-│   ├── architecture.png
-│   ├── dms_config_guide.md
-│   └── data_flow.md
-└── README.md
+│   ├── unit/
+│   │   └── test_merge_logic.py
+│   └── integration/
+│       └── test_end_to_end.py
+├── config/
+│   ├── dev.yaml
+│   └── prod.yaml
+└── .github/
+    └── workflows/
+        └── ci-cd.yaml
 ```
