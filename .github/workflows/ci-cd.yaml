@@ -1,0 +1,40 @@
+# Define workflow name and triggers (push, PR)
+
+# Define jobs:
+#   test: Run unit tests with pytest
+#   lint: Run flake8 and black
+#   terraform-validate: Check Terraform syntax
+#   deploy-dev: Deploy to dev on develop branch
+
+# For test job:
+#   Checkout code
+#   Set up Python 3.12
+#   Install dependencies
+#   Run pytest with coverage
+#   Upload coverage to Codecov
+
+# For lint job:
+#   Checkout code
+#   Run flake8 on src/
+#   Run black --check on src/
+
+# For terraform-validate job:
+#   Setup Terraform
+#   Run terraform fmt -check
+#   Run terraform init -backend=false
+#   Run terraform validate
+
+# For deploy-dev job:
+#   Needs: test, lint, terraform-validate
+#   Configure AWS credentials
+#   Run package_lambda.sh
+#   Setup Terragrunt
+#   Run terragrunt plan
+#   Run terragrunt apply
+#   Run integration tests (optional)
+
+# For deploy-prod job:
+#   Add manual approval step
+#   Similar to deploy-dev but for prod environment
+
+# Send Slack notification on completion
