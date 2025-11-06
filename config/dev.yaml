@@ -1,0 +1,25 @@
+# Set environment: dev
+
+# Set aws_region: us-east-1
+
+# Define redshift section:
+#   node_type: dc2.large
+#   number_of_nodes: 1
+#   database_name: cdcdb
+#   publicly_accessible: true (for dev only)
+
+# Define vpc section:
+#   cidr: 10.0.0.0/16
+#   subnets: [10.0.1.0/24, 10.0.2.0/24]
+
+# Define lambda section:
+#   timeout: 300
+#   memory: 512
+#   batch_size: 100
+
+# Define monitoring section:
+#   log_retention_days: 7
+#   enable_alarms: true
+#   alert_email: (empty for dev)
+
+# Define tags section
